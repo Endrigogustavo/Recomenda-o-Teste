@@ -3,13 +3,13 @@ import axios from 'axios';
 import './App.css';
 
 function App() {
-  const [jobId, setJobId] = useState('');
+  const [jobTitle, setJobTitle] = useState('');
   const [recommendations, setRecommendations] = useState([]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/recommend', { job_id: parseInt(jobId) });
+      const response = await axios.post('http://localhost:5000/recommend', { job_title: jobTitle });
       setRecommendations(response.data);
     } catch (error) {
       console.error('Error fetching recommendations:', error);
@@ -22,11 +22,11 @@ function App() {
         <h1>Job Recommendation System</h1>
         <form onSubmit={handleSubmit}>
           <label>
-            Job ID:
+            Job Title:
             <input
-              type="number"
-              value={jobId}
-              onChange={(e) => setJobId(e.target.value)}
+              type="text"
+              value={jobTitle}
+              onChange={(e) => setJobTitle(e.target.value)}
             />
           </label>
           <button type="submit">Get Recommendations</button>
