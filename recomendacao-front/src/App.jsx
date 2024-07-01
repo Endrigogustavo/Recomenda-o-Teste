@@ -10,6 +10,7 @@ function App() {
     event.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/recommend', { job_title: jobTitle });
+      //const response = await axios.post('http://localhost:5000/recommend', { job_id: parseInt(jobId) });
       setRecommendations(response.data);
     } catch (error) {
       console.error('Error fetching recommendations:', error);
