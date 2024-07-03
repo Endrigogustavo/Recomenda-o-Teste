@@ -46,7 +46,11 @@ jobs = [
     {"id": 37, "title": "Site Reliability Engineer", "description": "Ensure the reliability and availability of critical systems."},
     {"id": 38, "title": "Data Engineer", "description": "Build and maintain data infrastructure and ETL processes."},
     {"id": 39, "title": "Information Security Analyst", "description": "Monitor and protect information systems from security breaches."},
-    {"id": 40, "title": "Robotics Engineer", "description": "Design and develop robotic systems and applications."}
+    {"id": 40, "title": "Robotics Engineer", "description": "Design and develop robotic systems and applications."},
+{"id": 41, "title": "Digital Marketing Specialist", "description": "Plan and execute digital marketing campaigns."},
+{"id": 42, "title": "Digital Marketing Specialist", "description": "Plan and execute digital marketing campaigns."},
+{"id": 43, "title": "Digital Marketing Specialist", "description": "Plan and execute digital marketing campaigns."},
+
 ]
 
 descriptions = [job['description'] for job in jobs]
@@ -68,9 +72,12 @@ def recommend():
         return jsonify({"error": "Job title not found"}), 404
 
     cosine_similarities = linear_kernel(tfidf[job_index:job_index+1], tfidf).flatten()
-    related_docs_indices = cosine_similarities.argsort()[:-5:-1]
+    related_docs_indices = cosine_similarities.argsort()[:-20:-1]
 
+    # Incluir a vaga pesquisada nas recomendações
     recommendations = [jobs[i] for i in related_docs_indices if i != job_index]
+    recommendations.insert(0, jobs[job_index])  # Colocar a vaga pesquisada no início
+
     return jsonify(recommendations)
 
 if __name__ == '__main__':

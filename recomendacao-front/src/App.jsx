@@ -4,6 +4,7 @@ import './App.css';
 
 function App() {
   const [jobTitle, setJobTitle] = useState('');
+  const [jobId, setJobID] = useState('');
   const [recommendations, setRecommendations] = useState([]);
 
   const handleSubmit = async (event) => {
